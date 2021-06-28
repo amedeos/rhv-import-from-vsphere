@@ -1,0 +1,11 @@
+engine_n: rhvm.example.com
+engine_user: admin@internal
+#engine_password: << vaulted >>
+engine_cluster: Default
+engine_storage_domain: SDVM01
+import_timeout: 3600
+vm_name: centos8
+vmware_datacenter: VDC1
+vmware_username: "Administrator%40vsphere.local"
+#vmware_password: << vaulted >>
+vmware_url: "vpx://Administrator%40vsphere.local@vcenter.example.com/VDC1/cluster1/esxi02.example.com?no_verify=1"

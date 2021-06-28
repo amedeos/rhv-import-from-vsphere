@@ -1,0 +1,46 @@
+- name: Template Provisioning
+  hosts: localhost
+  become: false
+  gather_facts: false
+  vars_files:
+    - variables.yaml
+    - variables-vault.yaml
+  tasks:
+  - name: Add engine group-host
+    add_host:
+      name: "{{ engine_n }}"
+      ansible_ssh_private_key_file: /etc/pki/ovirt-engine/keys/engine_id_rsa
+      ansible_ssh_user: root
+      groups:
+        - engine
+
+- name: Inport VM from vSphere
+  hosts: engine
+  vars_files:
+    - variables.yaml
+    - variables-vault.yaml
+  tasks:
+  - name: Create auth
+    ovirt_auth:
+      url: "https://{{ engine_n }}/ovirt-engine/api"
+      username: "{{ engine_user }}"
+      password: "{{ engine_password }}"
+      insecure: True
+
+  - name: Import vm
+    ovirt_vm:
+      name: "{{ vm_name }}"
+      state: stopped
+      cluster: "{{ engine_cluster }}"
+      operating_system: rhel_8x64
+      timeout: "{{ import_timeout }}"
+      poll_interval: 30
+      auth: "{{ ovirt_auth }}"
+      host: "rhvhost01.example.com"
+      vmware:
+        url: "{{ vmware_url }}"
+        name: "{{ vm_name }}"
+        storage_domain: "{{ engine_storage_domain }}"
+        username: "{{ vmware_username }}"
+        password: "{{ vmware_password }}"
+

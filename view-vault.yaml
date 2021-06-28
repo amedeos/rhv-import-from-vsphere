@@ -1,0 +1,15 @@
+- name: Template Cleaning
+  hosts: localhost
+  become: false
+  gather_facts: false
+  vars_files:
+    - variables-vault.yaml
+    - variables.yaml
+  tasks:
+  - name: engine_password
+    debug:
+      var: engine_password
+
+  - name: vmware_password
+    debug:
+      var: vmware_password

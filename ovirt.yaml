@@ -36,7 +36,7 @@
       timeout: "{{ import_timeout }}"
       poll_interval: 30
       auth: "{{ ovirt_auth }}"
-      host: "rhvhost01.example.com"
+      host: "{{ engine_host_conversion }}"
       vmware:
         url: "{{ vmware_url }}"
         name: "{{ vm_name }}"

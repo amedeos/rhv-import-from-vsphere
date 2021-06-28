@@ -3,6 +3,7 @@ engine_user: admin@internal
 #engine_password: << vaulted >>
 engine_cluster: Default
 engine_storage_domain: SDVM01
+engine_host_conversion: rhvhost01.example.com
 import_timeout: 3600
 vm_name: centos8
 vmware_datacenter: VDC1
